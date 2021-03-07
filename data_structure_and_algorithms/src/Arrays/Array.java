@@ -132,12 +132,15 @@ public class Array<T extends Comparable<T>> {
         var lengthOfFirstArray = items.length;
         var intersectedArray = new Array<T>(lengthOfFirstArray);
 
+        insertCommonItemsToNewArray(other, intersectedArray);
+        return intersectedArray;
+    }
+
+    private void insertCommonItemsToNewArray(Array<T> other, Array<T> intersectedArray) {
         for (T item : items)
             for (int j = 0; j < other.items.length; j++)
                 if (item == other.items[j])
                     intersectedArray.insert(item);
-
-        return intersectedArray;
     }
 
     @Override
