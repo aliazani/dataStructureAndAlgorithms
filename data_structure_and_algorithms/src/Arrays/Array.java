@@ -36,17 +36,30 @@ public class Array<T extends Comparable<T>> {
 
     private void insertItemAtVariousPlacesOfArray(T item, int index) {
         if (isAtTheEndOfArray(index)) {
-            copyItemsBeforeInsertNewItemAtIndex(index);
-            arrayWithNewLength.items[index] = item;
+            insertAtTheEndOfArray(item, index);
         } else if (isAtTheFirstOfArray(index)) {
-            arrayWithNewLength.items[index] = item;
-            ShiftItemsFromFirstOfArrayToRight(index);
+            insertAtTheFirstOfArray(item, index);
         } else {
-            copyItemsBeforeInsertNewItemAtIndex(index);
-            arrayWithNewLength.items[index] = item;
-            shiftItemsFromIndexToRight(index);
+            insertInTheMiddleOfArray(item, index);
         }
     }
+
+    private void insertAtTheEndOfArray(T item, int index) {
+        copyItemsBeforeInsertNewItemAtIndex(index);
+        arrayWithNewLength.items[index] = item;
+    }
+
+    private void insertAtTheFirstOfArray(T item, int index) {
+        arrayWithNewLength.items[index] = item;
+        ShiftItemsFromFirstOfArrayToRight(index);
+    }
+
+    private void insertInTheMiddleOfArray(T item, int index) {
+        copyItemsBeforeInsertNewItemAtIndex(index);
+        arrayWithNewLength.items[index] = item;
+        shiftItemsFromIndexToRight(index);
+    }
+
 
     private boolean isAtTheEndOfArray(int index) {
         return index == arrayWithNewLength.items.length - 1;
