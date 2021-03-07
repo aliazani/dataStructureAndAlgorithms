@@ -60,7 +60,6 @@ public class Array<T extends Comparable<T>> {
         shiftItemsFromIndexToRight(index);
     }
 
-
     private boolean isAtTheEndOfArray(int index) {
         return index == arrayWithNewLength.items.length - 1;
     }
@@ -87,14 +86,12 @@ public class Array<T extends Comparable<T>> {
                 arrayWithNewLength.items[i + 1] = items[i];
     }
 
-
     public void removeAt(int index) {
         items[index] = null;
         arrayWithNewLength = new Array<T>(--count);
         copyItemsToResizedArray();
         replaceOldArrayWithResizedOne();
     }
-
 
     private void copyItemsToResizedArray() {
         for (T item : items)
@@ -109,7 +106,6 @@ public class Array<T extends Comparable<T>> {
     private void replaceOldArrayWithResizedOne() {
         items = arrayWithNewLength.items;
     }
-
 
     public int indexOf(T item) {
         for (int i = 0; i < items.length; i++) {
@@ -127,7 +123,6 @@ public class Array<T extends Comparable<T>> {
 
         return reversedArray;
     }
-
 
     public T max() {
         T maximumValue = items[0];
@@ -149,7 +144,6 @@ public class Array<T extends Comparable<T>> {
 
         return intersectedArray;
     }
-
 
     @Override
     public String toString() {
