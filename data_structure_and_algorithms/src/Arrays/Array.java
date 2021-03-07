@@ -35,9 +35,9 @@ public class Array<T extends Comparable<T>> {
     }
 
     private void insertItemAtVariousPlacesOfArray(T item, int index) {
-        if (isAtTheEndOfArray(index)) {
+        if (isInsertionAtTheEndOfArray(index)) {
             insertAtTheEndOfArray(item, index);
-        } else if (isAtTheFirstOfArray(index)) {
+        } else if (isInsertionAtTheFirstOfArray(index)) {
             insertAtTheFirstOfArray(item, index);
         } else {
             insertInTheMiddleOfArray(item, index);
@@ -60,24 +60,24 @@ public class Array<T extends Comparable<T>> {
         shiftOneItemToRight(index);
     }
 
-    private boolean isAtTheEndOfArray(int index) {
+    private boolean isInsertionAtTheEndOfArray(int index) {
         return index == arrayWithNewLength.items.length - 1;
     }
 
     private void copyItemsBeforeInsertNewItemAtIndex(int index) {
         for (int i = 0; i < index; i++)
-            if (!isNull(items[i]))
+            if (isNotNull(items[i]))
                 arrayWithNewLength.items[i] = items[i];
     }
 
-    private boolean isAtTheFirstOfArray(int index) {
+    private boolean isInsertionAtTheFirstOfArray(int index) {
         return index == 0;
     }
 
 
     private void shiftOneItemToRight(int start) {
         for (int i = start; i < items.length; i++)
-            if (!isNull(items[i]))
+            if (isNotNull(items[i]))
                 arrayWithNewLength.items[i + 1] = items[i];
     }
 
@@ -90,12 +90,12 @@ public class Array<T extends Comparable<T>> {
 
     private void copyItemsToResizedArray() {
         for (T item : items)
-            if (!isNull(item))
+            if (isNotNull(item))
                 arrayWithNewLength.insert(item);
     }
 
-    private boolean isNull(T item) {
-        return item == null;
+    private boolean isNotNull(T item) {
+        return item != null;
     }
 
     private void replaceOldArrayWithResizedOne() {
