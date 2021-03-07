@@ -51,13 +51,13 @@ public class Array<T extends Comparable<T>> {
 
     private void insertAtTheFirstOfArray(T item, int index) {
         arrayWithNewLength.items[index] = item;
-        ShiftItemsFromFirstOfArrayToRight(index);
+        shiftOneItemToRight(0);
     }
 
     private void insertInTheMiddleOfArray(T item, int index) {
         copyItemsBeforeInsertNewItemAtIndex(index);
         arrayWithNewLength.items[index] = item;
-        shiftItemsFromIndexToRight(index);
+        shiftOneItemToRight(index);
     }
 
     private boolean isAtTheEndOfArray(int index) {
@@ -74,14 +74,9 @@ public class Array<T extends Comparable<T>> {
         return index == 0;
     }
 
-    private void ShiftItemsFromFirstOfArrayToRight(int index) {
-        for (int i = 0; i < items.length; i++)
-            if (!isNull(items[i]))
-                arrayWithNewLength.items[i + 1] = items[i];
-    }
 
-    private void shiftItemsFromIndexToRight(int index) {
-        for (int i = index; i < items.length; i++)
+    private void shiftOneItemToRight(int start) {
+        for (int i = start; i < items.length; i++)
             if (!isNull(items[i]))
                 arrayWithNewLength.items[i + 1] = items[i];
     }
