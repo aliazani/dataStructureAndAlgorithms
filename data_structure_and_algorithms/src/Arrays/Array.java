@@ -37,8 +37,8 @@ public class Array<T extends Comparable<T>> {
     private void insertItemAtVariousPlacesOfArray(T item, int index) {
         if (isInsertionAtTheEndOfArray(index)) {
             insertAtTheEndOfArray(item, index);
-        } else if (isInsertionAtTheFirstOfArray(index)) {
-            insertAtTheFirstOfArray(item, index);
+        } else if (isInsertionAtTheBeginningOfArray(index)) {
+            insertAtTheBeginningOfArray(item, index);
         } else {
             insertInTheMiddleOfArray(item, index);
         }
@@ -49,7 +49,7 @@ public class Array<T extends Comparable<T>> {
         arrayWithNewLength.items[index] = item;
     }
 
-    private void insertAtTheFirstOfArray(T item, int index) {
+    private void insertAtTheBeginningOfArray(T item, int index) {
         arrayWithNewLength.items[index] = item;
         shiftOneItemToRight(0);
     }
@@ -70,7 +70,7 @@ public class Array<T extends Comparable<T>> {
                 arrayWithNewLength.items[i] = items[i];
     }
 
-    private boolean isInsertionAtTheFirstOfArray(int index) {
+    private boolean isInsertionAtTheBeginningOfArray(int index) {
         return index == 0;
     }
 
