@@ -149,19 +149,19 @@ public class ArrayTest {
 
     @Test
     public void checkInsertAtInArrayAtFirst() throws Exception {
-        integerArray.insertAt(1, 0);
-        integerArray.insertAt(2, 0);
-        integerArray.insertAt(3, 0);
-        integerArray.insertAt(10, 0);
+        integerArray.insertAt(0, 1);
+        integerArray.insertAt(0, 2);
+        integerArray.insertAt(0, 3);
+        integerArray.insertAt(0, 10);
         Assert.assertEquals("[10, 3, 2, 1]", integerArray.toString());
     }
 
     @Test
     public void checkInsertAtInTheMiddleOfArray() throws Exception {
-        integerArray.insertAt(1, 0);
-        integerArray.insertAt(2, 1);
-        integerArray.insertAt(3, 2);
-        integerArray.insertAt(10, 1);
+        integerArray.insertAt(0, 1);
+        integerArray.insertAt(1, 2);
+        integerArray.insertAt(2, 3);
+        integerArray.insertAt(1, 10);
 
         Assert.assertEquals("[1, 10, 2, 3]", integerArray.toString());
     }
@@ -169,10 +169,10 @@ public class ArrayTest {
     @Test
     public void checkInsertAtArrayAtLast() throws Exception {
 
-        integerArray.insertAt(1, 0);
-        integerArray.insertAt(2, 1);
-        integerArray.insertAt(3, 2);
-        integerArray.insertAt(10, 3);
+        integerArray.insertAt(0, 1);
+        integerArray.insertAt(1, 2);
+        integerArray.insertAt(2, 3);
+        integerArray.insertAt(3, 10);
 
         Assert.assertEquals("[1, 2, 3, 10]", integerArray.toString());
     }

@@ -12,10 +12,10 @@ public class Array<T extends Comparable<T>> {
     }
 
     public void insert(T item) {
-        insertAt(item, count);
+        insertAt(count, item);
     }
 
-    public void insertAt(T item, int index) {
+    public void insertAt(int index, T item) {
         createNewArray();
         insertItemAtVariousPlacesOfArray(item, index);
         replaceOldArrayWithResizedOne();
