@@ -100,6 +100,7 @@ public class Array<T extends Comparable<T>> {
 
     private void replaceOldArrayWithResizedOne() {
         items = arrayWithNewLength.items;
+        arrayWithNewLength = null;
     }
 
     public int indexOf(T item) {
