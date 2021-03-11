@@ -23,6 +23,15 @@ public class LinkedListTest {
     }
 
     @Test
+    public void removeANodeFromLinkedListWithOneNode() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.deleteFirst();
+        linkedListOfInteger.deleteLast();
+        Assert.assertEquals("[]", linkedListOfInteger.toString());
+    }
+
+    @Test
     public void addNodesAtFirst() throws Exception {
         linkedListOfInteger.addFirst(3);
         linkedListOfInteger.addFirst(2);
@@ -76,6 +85,29 @@ public class LinkedListTest {
         linkedListOfInteger.deleteLast();
         linkedListOfInteger.deleteFirst();
         Assert.assertEquals(1, linkedListOfInteger.indexOf(2));
+    }
+
+    @Test
+    public void getSizeOfLinkedList() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addLast(4);
+        linkedListOfInteger.addFirst(0);
+        linkedListOfInteger.deleteLast();
+        linkedListOfInteger.deleteFirst();
+
+        Assert.assertEquals(3, linkedListOfInteger.size());
+    }
+
+    @Test
+    public void convertLinkedListToArray() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addLast(4);
+        linkedListOfInteger.addFirst(0);
+        Assert.assertEquals("[0, 1, 2, 3, 4]",linkedListOfInteger.toArray().toString());
     }
 
     @Test

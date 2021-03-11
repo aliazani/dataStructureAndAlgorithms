@@ -1,19 +1,22 @@
 package LinkedList;
 
-import java.util.Iterator;
+import Arrays.Array;
 
-public class LinkedList<N> implements Iterable<Node<N>> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
 
     private Node<N> first;
     private Node<N> last;
     private Node<N> current;
-    private int index;
+    private int count;
 
     public LinkedList() {
         first = null;
         last = null;
         current = null;
-        index = 0;
+        count = 0;
     }
 
     public void addLast(N item) {
@@ -23,6 +26,7 @@ public class LinkedList<N> implements Iterable<Node<N>> {
             insertNewNodeToEmptyLinkedList(node);
         else
             insertNewNodeAtTheEnd(node);
+        count++;
     }
 
     public void addFirst(N item) {
@@ -32,6 +36,7 @@ public class LinkedList<N> implements Iterable<Node<N>> {
             insertNewNodeToEmptyLinkedList(node);
         else
             insertNewNodeAtTheBeginning(node);
+        count++;
     }
 
     private boolean isLinkedListEmpty() {
@@ -53,21 +58,54 @@ public class LinkedList<N> implements Iterable<Node<N>> {
     }
 
     public void deleteFirst() {
-        first = first.getNext();
+        if (isLinkedListEmpty())
+            throw new NoSuchElementException();
+        else if (linkedListHasOneItem())
+            first = last = null;
+        else {
+            replaceFirstNodeWithSecondNode();
+        }
+        count--;
+    }
+
+    private void replaceFirstNodeWithSecondNode() {
+        var second = first.getNext();
+        first.setNext(null);
+        first = second;
     }
 
     public void deleteLast() {
-        for (var node : this)
-            if (node.getNext().getNext() == null)
-                replaceTheLastNode(node);
+        if (isLinkedListEmpty())
+            throw new NoSuchElementException();
+        else if (linkedListHasOneItem())
+            first = last = null;
+        else {
+            var node = getPrevious(last);
+            replaceTheLastNodeWithPrevious(node);
+        }
+        count--;
     }
 
-    private void replaceTheLastNode(Node<N> current) {
-        last = current;
+    private boolean linkedListHasOneItem() {
+        return first == last;
+    }
+
+    private Node<N> getPrevious(Node<N> node) {
+        for (var eachNode : this)
+            if (eachNode.getNext() == node)
+                return eachNode;
+
+        return null;
+    }
+
+
+    private void replaceTheLastNodeWithPrevious(Node<N> previous) {
+        last = previous;
         last.setNext(null);
     }
 
     public int indexOf(N item) {
+        int index = 0;
         for (var node : this) {
             if (current.getValue() == item)
                 return index;
@@ -80,17 +118,35 @@ public class LinkedList<N> implements Iterable<Node<N>> {
         return indexOf(item) != -1;
     }
 
+    public int size() {
+        return count;
+    }
+
+    public Array<N> toArray() {
+        Array<N> array = new Array<N>(count);
+
+        for (var node : this)
+            array.insert(node.getValue());
+        return array;
+    }
+
     @Override
     public String toString() {
         var stringFormOfLinkedList = new StringBuilder("[");
 
+        if (!isLinkedListEmpty()) {
+            appendNodes(stringFormOfLinkedList);
+        }
+        stringFormOfLinkedList.append("]");
+        return stringFormOfLinkedList.toString();
+    }
+
+    private void appendNodes(StringBuilder stringFormOfLinkedList) {
         for (var node : this)
             if (node.getNext() != null)
                 stringFormOfLinkedList.append(node.getValue()).append(" -> ");
 
-        stringFormOfLinkedList.append(last.getValue()).append("]");
-
-        return stringFormOfLinkedList.toString();
+        stringFormOfLinkedList.append(last.getValue());
     }
 
     @Override
@@ -99,7 +155,7 @@ public class LinkedList<N> implements Iterable<Node<N>> {
         return new LinkedListIterator<N>(this);
     }
 
-    private class LinkedListIterator<N> implements Iterator<Node<N>> {
+    private class LinkedListIterator<N extends Comparable<N>> implements Iterator<Node<N>> {
 
         private LinkedList linkedList;
         private int numberOfCallGetNext = 0;
