@@ -77,6 +77,7 @@ public class LinkedListTest {
         linkedListOfInteger.deleteFirst();
         Assert.assertEquals(1, linkedListOfInteger.indexOf(2));
     }
+
     @Test
     public void checkOneOperationForAnotherType() throws Exception {
         linkedListOfString.addLast("a");

@@ -99,12 +99,12 @@ public class LinkedList<N> implements Iterable<Node<N>> {
         return new LinkedListIterator<N>(this);
     }
 
-    class LinkedListIterator<N> implements Iterator<Node<N>> {
+    private class LinkedListIterator<N> implements Iterator<Node<N>> {
 
         private LinkedList linkedList;
         private int numberOfCallGetNext = 0;
 
-        public LinkedListIterator(LinkedList<N> linkedList) {
+        private LinkedListIterator(LinkedList<N> linkedList) {
             this.linkedList = linkedList;
         }
 
