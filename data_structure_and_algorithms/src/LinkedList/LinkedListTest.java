@@ -23,23 +23,6 @@ public class LinkedListTest {
     }
 
     @Test
-    public void iteratorCheck() throws Exception {
-        linkedListOfInteger.addLast(0);
-        linkedListOfInteger.addLast(1);
-        linkedListOfInteger.addLast(2);
-        linkedListOfInteger.iterate();
-    }
-
-    @Test
-    public void addNodesAtLastLinkedListOfString() throws Exception {
-        linkedListOfString.addLast("a");
-        linkedListOfString.addLast("b");
-        linkedListOfString.addLast("c");
-        Assert.assertEquals("[a -> b -> c]", linkedListOfString.toString());
-
-    }
-
-    @Test
     public void addNodesAtFirst() throws Exception {
         linkedListOfInteger.addFirst(3);
         linkedListOfInteger.addFirst(2);
@@ -93,7 +76,13 @@ public class LinkedListTest {
         linkedListOfInteger.deleteLast();
         linkedListOfInteger.deleteFirst();
         Assert.assertEquals(1, linkedListOfInteger.indexOf(2));
-
-
     }
+    @Test
+    public void checkOneOperationForAnotherType() throws Exception {
+        linkedListOfString.addLast("a");
+        linkedListOfString.addLast("b");
+        linkedListOfString.addLast("c");
+        Assert.assertEquals("[a -> b -> c]", linkedListOfString.toString());
+    }
+
 }

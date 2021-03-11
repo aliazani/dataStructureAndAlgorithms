@@ -1,14 +1,18 @@
 package LinkedList;
 
-public class LinkedList<N> {
+import java.util.Iterator;
+
+public class LinkedList<N> implements Iterable<Node<N>> {
 
     private Node<N> first;
     private Node<N> last;
+    private Node<N> current;
     private int index;
 
     public LinkedList() {
         first = null;
         last = null;
+        current = null;
         index = 0;
     }
 
@@ -39,42 +43,35 @@ public class LinkedList<N> {
     }
 
     private void insertNewNodeAtTheEnd(Node<N> node) {
-        last.next = node;
+        last.setNext(node);
         last = node;
     }
 
     private void insertNewNodeAtTheBeginning(Node<N> node) {
-        node.next = first;
+        node.setNext(first);
         first = node;
     }
 
     public void deleteFirst() {
-        first = first.next;
+        first = first.getNext();
     }
 
     public void deleteLast() {
-        var current = first;
-
-        while (current != null) {
-            if (current.next == last)
-                replaceTheLastNode(current);
-            current = current.next;
-        }
+        for (var node : this)
+            if (node.getNext().getNext() == null)
+                replaceTheLastNode(node);
     }
 
     private void replaceTheLastNode(Node<N> current) {
         last = current;
-        last.next = null;
+        last.setNext(null);
     }
 
     public int indexOf(N item) {
-        var current = first;
-
-        while (current != null) {
-            if (current.value == item)
+        for (var node : this) {
+            if (current.getValue() == item)
                 return index;
             index++;
-            current = current.next;
         }
         return -1;
     }
@@ -85,24 +82,45 @@ public class LinkedList<N> {
 
     @Override
     public String toString() {
-        var stringFormOfLinkedList = "[";
-        var current = first;
+        var stringFormOfLinkedList = new StringBuilder("[");
 
-        while (current.next != null) {
-            stringFormOfLinkedList += current.value + " -> ";
-            current = current.next;
-        }
-        stringFormOfLinkedList += current.value + "]";
-        return stringFormOfLinkedList;
+        for (var node : this)
+            if (node.getNext() != null)
+                stringFormOfLinkedList.append(node.getValue()).append(" -> ");
+
+        stringFormOfLinkedList.append(last.getValue()).append("]");
+
+        return stringFormOfLinkedList.toString();
     }
 
-    static class Node<T> {
-        private final T value;
-        private Node<T> next;
-
-        public Node(T value) {
-            this.value = value;
-        }
+    @Override
+    public Iterator<Node<N>> iterator() {
+        current = this.first;
+        return new LinkedListIterator<N>(this);
     }
 
+    class LinkedListIterator<N> implements Iterator<Node<N>> {
+
+        private LinkedList linkedList;
+        private int numberOfCallGetNext = 0;
+
+        public LinkedListIterator(LinkedList<N> linkedList) {
+            this.linkedList = linkedList;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (current.getNext() != null);
+        }
+
+        @Override
+        public Node<N> next() {
+            current = first; // Point to the first Node
+
+            for (int j = 0; j < numberOfCallGetNext; j++) // First the loop will not run to return 0th Node after that 1 time , 2 time, ...
+                current = current.getNext();
+            numberOfCallGetNext++;
+            return (Node<N>) current;
+        }
+    }
 }
