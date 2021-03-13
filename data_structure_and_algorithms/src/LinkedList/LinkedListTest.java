@@ -107,7 +107,36 @@ public class LinkedListTest {
         linkedListOfInteger.addLast(3);
         linkedListOfInteger.addLast(4);
         linkedListOfInteger.addFirst(0);
-        Assert.assertEquals("[0, 1, 2, 3, 4]",linkedListOfInteger.toArray().toString());
+        Assert.assertEquals("[0, 1, 2, 3, 4]", linkedListOfInteger.toArray().toString());
+    }
+
+    @Test
+    public void reverseLinkedListWith3Nodes() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.reverse();
+        Assert.assertEquals("[3 -> 2 -> 1]", linkedListOfInteger.toString());
+    }
+
+    @Test
+    public void reverseLinkedListWithMoreThan3Nodes() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addFirst(0);
+        linkedListOfInteger.reverse();
+        Assert.assertEquals("[3 -> 2 -> 1 -> 0]", linkedListOfInteger.toString());
+
+    }
+
+    @Test
+    public void getKthNearestNode() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        var x = linkedListOfInteger.getKthFromTheEnd(3);
+        Assert.assertEquals("1", x.toString());
     }
 
     @Test

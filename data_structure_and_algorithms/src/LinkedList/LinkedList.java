@@ -155,6 +155,43 @@ public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
         return new LinkedListIterator<N>(this);
     }
 
+    public void reverse() {
+        if (isLinkedListEmpty()) return;
+
+        var previous = first;
+        var current = first.getNext();
+        while (current != null) {
+            var next = current.getNext();
+            current.setNext(previous);
+
+            previous = current;
+            current = next;
+        }
+        last = first;
+        last.setNext(null);
+        first = previous;
+
+    }
+
+    public N getKthFromTheEnd(int k) {
+        if (isLinkedListEmpty()) throw new IllegalArgumentException();
+
+        if (k > count) throw new IllegalArgumentException();
+
+        var firstNode = first;
+        var secondNode = first;
+
+        for (int n = 0; n < k - 1; n++)
+            secondNode = secondNode.getNext();
+
+        while (secondNode != last) {
+            firstNode = firstNode.getNext();
+            secondNode = secondNode.getNext();
+        }
+
+        return firstNode.getValue();
+    }
+
     private class LinkedListIterator<N extends Comparable<N>> implements Iterator<Node<N>> {
 
         private LinkedList linkedList;
