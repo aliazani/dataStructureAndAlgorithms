@@ -138,6 +138,87 @@ public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
         return array;
     }
 
+    public void reverse() {
+        if (isLinkedListEmpty()) return;
+
+        var previous = first;
+        var current = first.getNext();
+        while (current != null) {
+            var next = current.getNext();
+            current.setNext(previous);
+
+            previous = current;
+            current = next;
+        }
+        swapFirstAndLast(previous);
+    }
+
+    private void swapFirstAndLast(Node<N> previous) {
+        last = first;
+        last.setNext(null);
+        first = previous;
+    }
+
+    public N getKthFromTheEnd(int k) {
+        if (isLinkedListEmpty()) throw new IllegalArgumentException();
+
+        if (k > count) throw new IllegalArgumentException();
+
+        var firstNode = first;
+        var secondNode = first;
+
+        secondNode = createDistanceFromFirst(k, secondNode);
+        while (secondNode != last) {
+            firstNode = firstNode.getNext();
+            secondNode = secondNode.getNext();
+        }
+        return firstNode.getValue();
+    }
+
+    private Node<N> createDistanceFromFirst(int k, Node<N> secondNode) {
+        for (int n = 0; n < k - 1; n++)
+            secondNode = secondNode.getNext();
+        return secondNode;
+    }
+
+    public String getMiddle() {
+        if (isLinkedListEmpty()) throw new IllegalArgumentException();
+
+        var middle = first;
+        var end = first;
+
+        while (isNotAtTheEndOfTheList(end)) {
+            middle = middle.getNext();
+            end = end.getNext().getNext();
+        }
+
+        if (isNumberOfNodeOdd(end))
+            return MessageFormat.format("Middle = {0}", middle.getValue());
+        else
+            return MessageFormat.format("Middle = {0}, {1}", middle.getValue(), middle.getNext().getValue());
+    }
+
+    private boolean isNotAtTheEndOfTheList(Node<N> end) {
+        return end != last && end.getNext() != last;
+    }
+
+    private boolean isNumberOfNodeOdd(Node<N> end) {
+        return end == last;
+    }
+
+    public boolean hasLoop() {
+        Node<N> slow = first;
+        Node<N> fast = first;
+
+        while (slow != null && fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if (slow == fast)
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         var stringFormOfLinkedList = new StringBuilder("[");
@@ -163,78 +244,7 @@ public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
         return new LinkedListIterator<N>(this);
     }
 
-    public void reverse() {
-        if (isLinkedListEmpty()) return;
-
-        var previous = first;
-        var current = first.getNext();
-        while (current != null) {
-            var next = current.getNext();
-            current.setNext(previous);
-
-            previous = current;
-            current = next;
-        }
-        last = first;
-        last.setNext(null);
-        first = previous;
-
-    }
-
-    public N getKthFromTheEnd(int k) {
-        if (isLinkedListEmpty()) throw new IllegalArgumentException();
-
-        if (k > count) throw new IllegalArgumentException();
-
-        var firstNode = first;
-        var secondNode = first;
-
-        for (int n = 0; n < k - 1; n++)
-            secondNode = secondNode.getNext();
-
-        while (secondNode != last) {
-            firstNode = firstNode.getNext();
-            secondNode = secondNode.getNext();
-        }
-
-        return firstNode.getValue();
-    }
-
-    public String getMiddle() {
-        var middle = first;
-        var end = first;
-
-        while (end != last && end.getNext() != last) {
-            middle = middle.getNext();
-            end = end.getNext().getNext();
-        }
-
-        if (isNumberOfNodeOdd(end))
-            return MessageFormat.format("Middle = {0}", middle.getValue());
-        else
-            return MessageFormat.format("Middle = {0}, {1}", middle.getValue(), middle.getNext().getValue());
-    }
-
-    private boolean isNumberOfNodeOdd(Node<N> end) {
-        return end == last;
-    }
-
-    public boolean hasLoop() {
-        Node<N> slow = first;
-        Node<N> fast = first;
-
-        while (slow != null && fast != null && fast.getNext() != null) {
-            slow = slow.getNext();
-            fast = fast.getNext().getNext();
-            if (slow == fast)
-                return true;
-        }
-        return false;
-    }
-
-
     private class LinkedListIterator<N extends Comparable<N>> implements Iterator<Node<N>> {
-
         private LinkedList linkedList;
         private int numberOfCallGetNext = 0;
 
