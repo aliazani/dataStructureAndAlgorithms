@@ -140,6 +140,43 @@ public class LinkedListTest {
     }
 
     @Test
+    public void printMiddleForOdd() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addLast(4);
+        linkedListOfInteger.addLast(5);
+        Assert.assertEquals("Middle = 3", linkedListOfInteger.getMiddle());
+    }
+
+    @Test
+    public void printMiddleForEven() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addLast(4);
+        Assert.assertEquals("Middle = 2, 3", linkedListOfInteger.getMiddle());
+    }
+
+    @Test
+    public void hastLoop() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        linkedListOfInteger.addLast(4);
+        linkedListOfInteger.createWithLoop();
+        Assert.assertTrue(linkedListOfInteger.hasLoop());
+    }
+
+    @Test
+    public void hastNotLoop() throws Exception {
+        linkedListOfInteger.addLast(1);
+        linkedListOfInteger.addLast(2);
+        linkedListOfInteger.addLast(3);
+        Assert.assertFalse(linkedListOfInteger.hasLoop());
+    }
+
+    @Test
     public void checkOneOperationForAnotherType() throws Exception {
         linkedListOfString.addLast("a");
         linkedListOfString.addLast("b");

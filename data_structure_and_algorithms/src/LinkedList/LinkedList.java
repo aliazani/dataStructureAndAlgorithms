@@ -2,6 +2,7 @@ package LinkedList;
 
 import Arrays.Array;
 
+import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -17,6 +18,13 @@ public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
         last = null;
         current = null;
         count = 0;
+    }
+
+    public void createWithLoop() {
+        current = first;
+        while (current != last)
+            current = current.getNext();
+        current.setNext(first);
     }
 
     public void addLast(N item) {
@@ -191,6 +199,39 @@ public class LinkedList<N extends Comparable<N>> implements Iterable<Node<N>> {
 
         return firstNode.getValue();
     }
+
+    public String getMiddle() {
+        var middle = first;
+        var end = first;
+
+        while (end != last && end.getNext() != last) {
+            middle = middle.getNext();
+            end = end.getNext().getNext();
+        }
+
+        if (isNumberOfNodeOdd(end))
+            return MessageFormat.format("Middle = {0}", middle.getValue());
+        else
+            return MessageFormat.format("Middle = {0}, {1}", middle.getValue(), middle.getNext().getValue());
+    }
+
+    private boolean isNumberOfNodeOdd(Node<N> end) {
+        return end == last;
+    }
+
+    public boolean hasLoop() {
+        Node<N> slow = first;
+        Node<N> fast = first;
+
+        while (slow != null && fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+            if (slow == fast)
+                return true;
+        }
+        return false;
+    }
+
 
     private class LinkedListIterator<N extends Comparable<N>> implements Iterator<Node<N>> {
 
