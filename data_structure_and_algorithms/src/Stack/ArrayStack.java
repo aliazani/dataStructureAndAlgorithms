@@ -2,11 +2,11 @@ package Stack;
 
 import java.util.ArrayList;
 
-public class Stack<T extends Comparable<T>> {
+public class ArrayStack<T extends Comparable<T>> {
     private int count;
     private ArrayList<T> array;
 
-    public Stack() {
+    public ArrayStack() {
         array = new ArrayList<>();
     }
 
