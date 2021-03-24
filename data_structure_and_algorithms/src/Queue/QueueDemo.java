@@ -27,6 +27,18 @@ public class QueueDemo {
         stackQueueShow();
         showPriorityQueue();
         showMyPriorityQueue();
+        Queue<Integer> integerQueue = new ArrayDeque<>();
+        integerQueue.add(10);
+        integerQueue.add(20);
+        integerQueue.add(30);
+        integerQueue.add(40);
+        integerQueue.add(50);
+        System.out.println(integerQueue);
+        System.out.println("Reverser:");
+        QueueReverser<Integer> queueReverser = new QueueReverser<Integer>();
+        queueReverser.reverse(3, integerQueue);
+        System.out.println(integerQueue);
+        showStackWith2Queues();
     }
 
     public static <E> void reverse(Queue<E> queue) {
@@ -96,7 +108,7 @@ public class QueueDemo {
             System.out.println(priorityQueue.remove());
     }
 
-    public static void showMyPriorityQueue(){
+    public static void showMyPriorityQueue() {
         PriorityQueueWithArray<Integer> priorityQueue = new PriorityQueueWithArray<>();
         priorityQueue.add(0);
         priorityQueue.add(10);
@@ -106,5 +118,18 @@ public class QueueDemo {
         priorityQueue.add(1);
         System.out.println("myPriorityQueue:");
         System.out.println(priorityQueue);
+    }
+
+    public static void showStackWith2Queues() {
+        StackWithTwoQueues<Integer> stack = new StackWithTwoQueues<Integer>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.pop();
+        stack.pop();
+        System.out.println(stack.peek());
+        System.out.println(stack);
+
     }
 }

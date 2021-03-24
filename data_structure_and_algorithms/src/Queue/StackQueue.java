@@ -4,35 +4,33 @@ import java.util.Stack;
 
 public class StackQueue<T> {
     private final Stack<T> reversedStack = new Stack<>();
-    // 2 stack
-    private Stack<T> stack = new Stack<>();
+    private final Stack<T> stack = new Stack<>();
     private int count;
 
-    // [1, 2, 3, 4]
-    // [4, 3, 2, 1]
     public void enqueue(T item) {
         stack.push(item);
         count++;
     }
 
     public T dequeue() {
-        reverseTheStack();
+        if (reversedStack.isEmpty())
+            reverseTheStack();
         var rear = reversedStack.pop();
         count--;
         return rear;
     }
 
     public T peek() {
-        reverseTheStack();
+        if (reversedStack.isEmpty())
+            reverseTheStack();
 
         var rear = reversedStack.peek();
         return rear;
     }
 
     private void reverseTheStack() {
-        if (reversedStack.isEmpty())
-            while (!stack.isEmpty())
-                reversedStack.push(stack.pop());
+        while (!stack.isEmpty())
+            reversedStack.push(stack.pop());
     }
 
     public boolean isEmpty() {
