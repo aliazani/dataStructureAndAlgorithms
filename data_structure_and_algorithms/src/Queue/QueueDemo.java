@@ -1,6 +1,7 @@
 package Queue;
 
 import java.util.ArrayDeque;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -24,6 +25,8 @@ public class QueueDemo {
         arrayQueueShow();
         System.out.println("stackQueue:");
         stackQueueShow();
+        showPriorityQueue();
+        showMyPriorityQueue();
     }
 
     public static <E> void reverse(Queue<E> queue) {
@@ -81,5 +84,27 @@ public class QueueDemo {
         System.out.println(stackQueue.dequeue());
         System.out.println(stackQueue);
 
+    }
+
+    public static void showPriorityQueue() {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(1);
+        priorityQueue.add(4);
+        priorityQueue.add(2);
+        priorityQueue.add(6);
+        while (!priorityQueue.isEmpty())
+            System.out.println(priorityQueue.remove());
+    }
+
+    public static void showMyPriorityQueue(){
+        PriorityQueueWithArray<Integer> priorityQueue = new PriorityQueueWithArray<>();
+        priorityQueue.add(0);
+        priorityQueue.add(10);
+        priorityQueue.add(8);
+        priorityQueue.add(2);
+        priorityQueue.add(11);
+        priorityQueue.add(1);
+        System.out.println("myPriorityQueue:");
+        System.out.println(priorityQueue);
     }
 }
