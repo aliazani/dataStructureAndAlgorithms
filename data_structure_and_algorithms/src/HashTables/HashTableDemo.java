@@ -80,11 +80,20 @@ public class HashTableDemo {
     }
 
     public static void showMyHashTable() {
-        HashTable<Integer, String> table = new HashTable<>(4);
-        table.put(1, "ali");
-        table.put(1, "reza");
-        table.put(2, "mohammad");
-        table.put(3, "maryam");
+        HashTable<Integer, String> table = new HashTable<>(5);
+        table.put(6, "A");
+        table.put(6, "A+");
+        table.put(8, "B");
+        table.put(11, "C");
+        System.out.println(table);
+        System.out.println(table.get(6));
+        table.remove(6);
+        System.out.println(table);
+        table.remove(8);
+        System.out.println(table);
+        table.put(8, "ali");
+        System.out.println(table);
+        table.put(13, "ali+");
         System.out.println(table);
     }
 }
