@@ -17,6 +17,9 @@ public class HashTableDemo {
         var res = countPairsWithDiff(new int[]{1, 7, 5, 9, 2, 12, 3}, 2);
         System.out.println(res);
         var res2 = twoSum(new int[]{2, 7, 11, 15}, 9);
+        System.out.println(Arrays.toString(res2));
+        System.out.println("MyHashMap:");
+        showMyHashMap();
     }
 
     private static void showHashMap() {
@@ -126,9 +129,32 @@ public class HashTableDemo {
         return count;
     }
 
-//    public static int[] twoSum(int[] numbers, int target) {
-//         [2, 7, 11, 15]
-//        for (int i = 0; i < numbers.length; i += 2)
-//
-//    }
+    public static int[] twoSum(int[] numbers, int target) {
+        for (int i = 0; i < numbers.length; i++)
+            for (int j = 0; j < numbers.length; j++)
+                if (numbers[i] + numbers[j] == target)
+                    return new int[]{i, j};
+
+        return null;
+
+    }
+
+    public static void showMyHashMap(){
+        MyHashMap<Integer, String> map = new MyHashMap<>(5);
+        map.put(1, "A");
+        map.put(2, "B");
+        map.put(3, "B");
+        map.put(4, "D");
+        map.put(5, "E");
+        System.out.println(map);
+        map.put(1, "Mohammadali");
+        System.out.println(map);
+        map.remove(5);
+        System.out.println(map);
+        map.put(8, "S");
+        System.out.println(map);
+        System.out.println(map.get(8));
+        System.out.println(map.size());
+
+    }
 }
