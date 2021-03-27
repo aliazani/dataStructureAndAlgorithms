@@ -1,9 +1,6 @@
 package HashTables;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class HashTableDemo {
     public static void main(String[] args) {
@@ -15,6 +12,11 @@ public class HashTableDemo {
         String str = "Ali";
         System.out.println("Ali's hashCode: " + str.hashCode());
         showMyHashTable();
+        int[] numbers = {1, 2, 3, 3, 3, 1, 2, 4, 5, 4, 3, 9, 3};
+        System.out.println(mostFrequent(numbers));
+        var res = countPairsWithDiff(new int[]{1, 7, 5, 9, 2, 12, 3}, 2);
+        System.out.println(res);
+        var res2 = twoSum(new int[]{2, 7, 11, 15}, 9);
     }
 
     private static void showHashMap() {
@@ -60,6 +62,22 @@ public class HashTableDemo {
         return Character.MIN_VALUE;
     }
 
+    public static int mostFrequent(int[] numbers) {
+        Map<Integer, Integer> repeat = new HashMap<>();
+
+        for (var number : numbers) {
+            var count = repeat.getOrDefault(number, 0);
+            repeat.put(number, count + 1);
+        }
+
+        int frequent = 0;
+        for (var entry : repeat.entrySet())
+            if (entry.getValue() > frequent)
+                frequent = entry.getKey();
+
+        return frequent;
+    }
+
     public static char findFirstRepeatedCharacter(String str) {
         Set<Character> alphabets = new HashSet<>();
         var chars = str.toLowerCase().toCharArray();
@@ -96,4 +114,21 @@ public class HashTableDemo {
         table.put(13, "ali+");
         System.out.println(table);
     }
+
+    public static int countPairsWithDiff(int[] numbers, int difference) {
+        int count = 0;
+        Arrays.sort(numbers);
+
+        for (var num : numbers)
+            if (Arrays.binarySearch(numbers, num - difference) >= 0)
+                count++;
+
+        return count;
+    }
+
+//    public static int[] twoSum(int[] numbers, int target) {
+//         [2, 7, 11, 15]
+//        for (int i = 0; i < numbers.length; i += 2)
+//
+//    }
 }
