@@ -1,4 +1,4 @@
-package LinkedList;
+package Linear.LinkedList;
 
 class Node<N> {
     private final N value;

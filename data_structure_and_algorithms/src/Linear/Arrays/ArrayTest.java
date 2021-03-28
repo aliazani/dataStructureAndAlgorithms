@@ -1,4 +1,4 @@
-package Arrays;
+package Linear.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;

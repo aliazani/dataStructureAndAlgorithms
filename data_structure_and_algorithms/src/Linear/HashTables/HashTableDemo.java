@@ -1,4 +1,4 @@
-package HashTables;
+package Linear.HashTables;
 
 import java.util.*;
 

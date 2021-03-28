@@ -1,4 +1,4 @@
-package Queue;
+package Linear.Queue;
 
 public class LinkedListQueue {
 }

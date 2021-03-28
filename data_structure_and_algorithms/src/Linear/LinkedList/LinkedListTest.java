@@ -1,4 +1,4 @@
-package LinkedList;
+package Linear.LinkedList;
 
 import org.junit.Assert;
 import org.junit.Before;

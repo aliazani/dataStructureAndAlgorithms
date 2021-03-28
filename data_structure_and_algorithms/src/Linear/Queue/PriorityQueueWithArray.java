@@ -1,4 +1,4 @@
-package Queue;
+package Linear.Queue;
 
 import java.util.ArrayList;
 

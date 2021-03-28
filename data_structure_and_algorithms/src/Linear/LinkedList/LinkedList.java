@@ -1,6 +1,6 @@
-package LinkedList;
+package Linear.LinkedList;
 
-import Arrays.Array;
+import Linear.Arrays.Array;
 
 import java.text.MessageFormat;
 import java.util.Iterator;
