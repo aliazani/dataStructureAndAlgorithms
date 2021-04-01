@@ -35,5 +35,9 @@ public class BinaryTreeDemo {
         System.out.println("Binary Tree: " + tree1.isBinarySearchTree(Integer.MIN_VALUE, Integer.MAX_VALUE));
         tree1.swapRoot();
         System.out.println("Binary Tree: " + tree1.isBinarySearchTree(Integer.MIN_VALUE, Integer.MAX_VALUE));
+
+        tree1.printNodesAtDistance(30);
+
+        tree1.traverseLevelOrder();
     }
 }

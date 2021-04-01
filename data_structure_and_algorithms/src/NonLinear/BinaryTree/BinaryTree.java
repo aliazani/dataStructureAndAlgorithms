@@ -55,8 +55,6 @@ public class BinaryTree<T extends Comparable<T>> {
         if (isEmpty(root))
             return true;
         if (root.value.compareTo(min) <= 0 || root.value.compareTo(max) >= 0)
-            // root - max < 0
-            // root - min > 0
             return false;
 
         return isBinarySearchTree(root.leftChild, min, root.value) &&
@@ -111,6 +109,26 @@ public class BinaryTree<T extends Comparable<T>> {
         return 1 + Math.max(
                 height(root.leftChild),
                 height(root.rightChild));
+    }
+
+    public void printNodesAtDistance(int distance) {
+        printNodesAtDistance(root, distance);
+    }
+
+    private void printNodesAtDistance(Node<T> root, int distance) {
+        if (isEmpty(root))
+            return;
+        if (distance == 0)
+            System.out.println(root.value);
+        else {
+            printNodesAtDistance(root.leftChild, distance - 1);
+            printNodesAtDistance(root.rightChild, distance - 1);
+        }
+    }
+
+    public void traverseLevelOrder() {
+        for (int i = 0; i <= height(root); i++)
+            printNodesAtDistance(i);
     }
 
     public boolean equals(BinaryTree<T> other) {
