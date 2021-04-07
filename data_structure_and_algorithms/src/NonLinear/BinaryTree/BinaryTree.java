@@ -1,7 +1,11 @@
 package NonLinear.BinaryTree;
 
+import java.util.NoSuchElementException;
+
 public class BinaryTree<T extends Comparable<T>> {
     private Node<T> root;
+    private int size;
+    private int countLeaves;
 
     public BinaryTree(T root) {
         this.root = new Node<>(root);
@@ -14,12 +18,14 @@ public class BinaryTree<T extends Comparable<T>> {
             if (current.value.compareTo(item) > 0) {
                 if (current.leftChild == null) {
                     current.leftChild = node;
+                    size++;
                     break;
                 }
                 current = current.leftChild;
             } else {
                 if (current.rightChild == null) {
                     current.rightChild = node;
+                    size++;
                     break;
                 }
                 current = current.rightChild;
@@ -39,6 +45,25 @@ public class BinaryTree<T extends Comparable<T>> {
                 return true;
         }
         return false;
+    }
+
+    public boolean contains(T item) {
+        return contains(item, root);
+    }
+
+    private boolean contains(T item, Node<T> root) {
+        try {
+            if (item.compareTo(root.value) == 0)
+                return true;
+
+            else if (root.value.compareTo(item) > 0)
+                contains(item, root.leftChild);
+            else if (root.value.compareTo(item) < 0)
+                contains(item, root.rightChild);
+            return true;
+        } catch (NullPointerException e) {
+            throw new NoSuchElementException();
+        }
     }
 
     public void swapRoot() {
@@ -154,12 +179,49 @@ public class BinaryTree<T extends Comparable<T>> {
     private T minimum(Node<T> root) {
         if (isLeaf(root))
             return root.value;
+
         T minValue = null;
         var left = minimum(root.leftChild);
         var right = minimum(root.rightChild);
         minValue = (right.compareTo(left) < 0) ? right : left;
         minValue = root.value.compareTo(minValue) < 0 ? root.value : minValue;
+
         return minValue;
+    }
+
+    public T maximum() {
+        return maximum(root);
+    }
+
+    private T maximum(Node<T> root) {
+        if (isLeaf(root))
+            return root.value;
+
+        T maxValue = null;
+        var left = maximum(root.leftChild);
+        var right = maximum(root.rightChild);
+        maxValue = (right.compareTo(left) > 0) ? right : left;
+        maxValue = root.value.compareTo(maxValue) > 0 ? root.value : maxValue;
+
+        return maxValue;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public int countLeaves() {
+        return countLeaves(root);
+    }
+
+    private int countLeaves(Node<T> root) {
+        if (isLeaf(root)) {
+            return countLeaves++;
+        }
+
+        countLeaves(root.leftChild);
+        countLeaves(root.rightChild);
+        return countLeaves;
     }
 
     private boolean isLeaf(Node<T> root) {

@@ -39,5 +39,15 @@ public class BinaryTreeDemo {
         tree1.printNodesAtDistance(30);
 
         tree1.traverseLevelOrder();
+
+        System.out.println(tree1.size());
+        System.out.println(tree1.countLeaves());
+
+        System.out.println(tree1.maximum());
+
+        System.out.println(tree2.find(3));
+        tree2.contains(3);
+        System.out.println(tree2.contains(3));
+        System.out.println(tree2.contains(50));
     }
 }
