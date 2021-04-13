@@ -1,4 +1,4 @@
-package NonLinear.BinaryTree.AVLTree;
+package NonLinear.AVLTree;
 
 import org.junit.Before;
 import org.junit.Test;

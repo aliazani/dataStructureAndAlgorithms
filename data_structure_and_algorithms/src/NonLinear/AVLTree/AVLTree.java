@@ -1,4 +1,4 @@
-package NonLinear.BinaryTree.AVLTree;
+package NonLinear.AVLTree;
 
 public class AVLTree<T extends Comparable<T>> {
     private static class AVLNode<T> {
