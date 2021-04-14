@@ -45,9 +45,20 @@ public class BinaryTreeDemo {
 
         System.out.println(tree1.maximum());
 
-        System.out.println(tree2.find(3));
-        tree2.contains(3);
-        System.out.println(tree2.contains(3));
+        System.out.println("tree find 3: " + tree2.find(3));
+        System.out.println("tree contains3 : " + tree2.contains(3));
         System.out.println(tree2.contains(50));
+        System.out.println(tree2.isPerfect());
+
+        var tree3 = new BinaryTree<Float>(12f);
+        tree3.insert(14f);
+        tree3.insert(9f);
+        System.out.println(tree3.isPerfect());
+        System.out.println("tree3 is balanced: " + tree3.isBalanced());
+
+        var tree4 = new BinaryTree<Integer>(10);
+        tree4.insert(20);
+        tree4.insert(30);
+        System.out.println("tree4 is balanced: " + tree4.isBalanced());
     }
 }

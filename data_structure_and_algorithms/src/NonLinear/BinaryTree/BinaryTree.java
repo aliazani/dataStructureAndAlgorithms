@@ -3,12 +3,29 @@ package NonLinear.BinaryTree;
 import java.util.NoSuchElementException;
 
 public class BinaryTree<T extends Comparable<T>> {
+    private class Node<T> {
+        private final T value;
+        private Node<T> leftChild;
+        private Node<T> rightChild;
+
+        public Node(T value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "Node=" + value;
+        }
+    }
+
     private Node<T> root;
     private int size;
     private int countLeaves;
+    private boolean flag = false;
 
     public BinaryTree(T root) {
         this.root = new Node<>(root);
+        size++;
     }
 
     public void insert(T item) {
@@ -33,6 +50,26 @@ public class BinaryTree<T extends Comparable<T>> {
         }
     }
 
+    public boolean isBalanced() {
+        var current = root;
+        while (!isLeaf(current)) {
+            if (Math.abs(height(current.leftChild) - height(current.rightChild)) > 1)
+                return false;
+            current = current.leftChild;
+        }
+        current = root;
+        while (!isLeaf(current)) {
+            if (Math.abs(height(current.leftChild) - height(current.rightChild)) > 1)
+                return false;
+            current = current.rightChild;
+        }
+        return true;
+    }
+
+    public boolean isPerfect() {
+        return (2 * (height(this.root) + 1) - 1) == this.size;
+    }
+
     public boolean find(T item) {
         var current = root;
 
@@ -48,22 +85,20 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     public boolean contains(T item) {
+        this.flag = false;
         return contains(item, root);
     }
 
     private boolean contains(T item, Node<T> root) {
-        try {
-            if (item.compareTo(root.value) == 0)
-                return true;
-
-            else if (root.value.compareTo(item) > 0)
-                contains(item, root.leftChild);
-            else if (root.value.compareTo(item) < 0)
-                contains(item, root.rightChild);
-            return true;
-        } catch (NullPointerException e) {
-            throw new NoSuchElementException();
-        }
+        if (root == null)
+            return flag = false;
+        else if (item.compareTo(root.value) == 0)
+            return flag = true;
+        else if (root.value.compareTo(item) > 0)
+            contains(item, root.leftChild);
+        else if (root.value.compareTo(item) < 0)
+            contains(item, root.rightChild);
+        return flag;
     }
 
     public void swapRoot() {
@@ -218,7 +253,6 @@ public class BinaryTree<T extends Comparable<T>> {
         if (isLeaf(root)) {
             return countLeaves++;
         }
-
         countLeaves(root.leftChild);
         countLeaves(root.rightChild);
         return countLeaves;
@@ -235,20 +269,5 @@ public class BinaryTree<T extends Comparable<T>> {
     @Override
     public String toString() {
         return root.toString();
-    }
-
-    private class Node<T> {
-        private final T value;
-        private Node<T> leftChild;
-        private Node<T> rightChild;
-
-        public Node(T value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return "Node=" + value;
-        }
     }
 }
