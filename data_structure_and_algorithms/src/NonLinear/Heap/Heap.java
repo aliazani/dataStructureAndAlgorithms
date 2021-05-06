@@ -40,18 +40,21 @@ public class Heap<T extends Comparable<T>> {
         items[second] = temp;
     }
 
-    public void remove() {
+    public T remove() {
         if (isEmpty())
             throw new IllegalStateException();
 
+        var root = items[0];
         items[0] = items[size - 1];
         items[size - 1] = null;
         size--;
         bubbleDown();
+
+        return root;
     }
 
-    private boolean isEmpty() {
-        return (items.length == 0);
+    public boolean isEmpty() {
+        return (size == 0);
     }
 
     private void bubbleDown() {
