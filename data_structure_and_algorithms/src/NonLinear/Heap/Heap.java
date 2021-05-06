@@ -12,7 +12,7 @@ public class Heap<T extends Comparable<T>> {
 
     public void insert(T item) {
         if (isFull())
-            throw new IllegalStateException();
+            throw new IllegalStateException("Heap is full!!");
         items[size++] = item;
         bubbleUp();
     }
@@ -50,6 +50,10 @@ public class Heap<T extends Comparable<T>> {
         bubbleDown();
     }
 
+    private boolean isEmpty() {
+        return (items.length == 0);
+    }
+
     private void bubbleDown() {
         var index = 0;
         while (index <= size && !isValidParent(index)) {
@@ -58,8 +62,14 @@ public class Heap<T extends Comparable<T>> {
         }
     }
 
-    private boolean isEmpty() {
-        return (items.length == 0);
+    private boolean isValidParent(int index) {
+        if (!hasLeftChild(index))
+            return true;
+        else if (!hasRightChild(index))
+            return items[index].compareTo(leftChild(index)) >= 0;
+        else
+            return items[index].compareTo(leftChild(index)) >= 0
+                    && items[index].compareTo(rightChild(index)) >= 0;
     }
 
     private int getLargerChildIndex(int index) {
@@ -79,16 +89,6 @@ public class Heap<T extends Comparable<T>> {
 
     private boolean hasRightChild(int index) {
         return getRightChildIndex(index) < size;
-    }
-
-    private boolean isValidParent(int index) {
-        if (!hasLeftChild(index))
-            return true;
-        else if (!hasRightChild(index))
-            return items[index].compareTo(leftChild(index)) >= 0;
-        else
-            return items[index].compareTo(leftChild(index)) >= 0
-                    && items[index].compareTo(rightChild(index)) >= 0;
     }
 
     private T leftChild(int index) {
