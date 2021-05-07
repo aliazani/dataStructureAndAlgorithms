@@ -110,6 +110,12 @@ public class Heap<T extends Comparable<T>> {
         return (index * 2) + 2;
     }
 
+    public T max() {
+        if (isEmpty())
+            throw new IllegalStateException();
+        return items[0];
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(items);
