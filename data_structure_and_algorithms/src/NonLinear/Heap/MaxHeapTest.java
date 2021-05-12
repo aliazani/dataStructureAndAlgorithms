@@ -23,15 +23,17 @@ public class HeapTest {
 
     @Test
     public void remove() {
+        heap.insert(15);
         heap.insert(10);
-        heap.insert(5);
-        heap.insert(17);
+        heap.insert(3);
+        heap.insert(8);
+        heap.insert(12);
+        heap.insert(9);
         heap.insert(4);
-        heap.insert(22);
+        heap.insert(1);
+        heap.insert(24);
         heap.remove();
-        heap.remove();
-        heap.remove();
-        Assert.assertEquals(heap.toString(), "[5, 4, null, null, null, null, null, null, null, null]");
+        Assert.assertEquals(heap.toString(), "[15, 12, 9, 8, 10, 3, 4, 1, null, null]");
     }
 
     @Test
