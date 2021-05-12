@@ -1,5 +1,6 @@
 package NonLinear.Heap;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +24,9 @@ public class MinHeapTest {
         minHeap.add(28, "mahmood");
         minHeap.add(32, "john");
         minHeap.add(30, "mosh");
-        System.out.println("pass");
+        Assert.assertEquals(minHeap.toString()
+                , "[1 = mehdi, 12 = ahmad, 2 = majid, 15 = ali," +
+                        " 25 = saber, 9 = reza, 4 = mohammad, 28 = mahmood, 32 = john, 30 = mosh]");
     }
 
     @Test
@@ -35,10 +38,9 @@ public class MinHeapTest {
         minHeap.add(23, "saber");
         minHeap.add(28, "majid");
         minHeap.add(2, "mehdi");
-        System.out.println(minHeap);
         minHeap.remove();
-        System.out.println(minHeap);
         minHeap.remove();
-        System.out.println(minHeap);
+        Assert.assertEquals(minHeap.toString(),
+                "[10 = ahmad, 13 = ali, 12 = reza, 28 = majid, 23 = saber, null, null, null, null, null]");
     }
 }
