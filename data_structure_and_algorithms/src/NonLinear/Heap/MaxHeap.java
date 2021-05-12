@@ -2,11 +2,11 @@ package NonLinear.Heap;
 
 import java.util.Arrays;
 
-public class Heap<T extends Comparable<T>> {
+public class MaxHeap<T extends Comparable<T>> {
     private final T[] items;
     private int size;
 
-    public Heap(int size) {
+    public MaxHeap(int size) {
         items = (T[]) new Comparable[size];
     }
 

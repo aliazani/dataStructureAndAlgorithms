@@ -1,28 +1,28 @@
 package Linear.Queue;
 
-import NonLinear.Heap.Heap;
+import NonLinear.Heap.MaxHeap;
 
 public class PriorityQueueWithHeap<T extends Comparable<T>> {
-    private final Heap<T> heap;
+    private final MaxHeap<T> maxHeap;
 
     public PriorityQueueWithHeap(int size) {
-        heap = new Heap<>(size);
+        maxHeap = new MaxHeap<>(size);
     }
 
     public void enqueue(T item) {
-        heap.insert(item);
+        maxHeap.insert(item);
     }
 
     public T dequeue() {
-        return heap.remove();
+        return maxHeap.remove();
     }
 
     public boolean isEmpty() {
-        return heap.isEmpty();
+        return maxHeap.isEmpty();
     }
 
     @Override
     public String toString() {
-        return heap.toString();
+        return maxHeap.toString();
     }
 }

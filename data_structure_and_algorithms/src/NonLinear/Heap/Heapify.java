@@ -38,13 +38,13 @@ public class Heapify {
         if (k < 1 || k > array.length)
             throw new IllegalStateException();
 
-        Heap<Integer> heap = new Heap<>(array.length);
+        MaxHeap<Integer> maxHeap = new MaxHeap<>(array.length);
         for (var item : array)
-            heap.insert(item);
+            maxHeap.insert(item);
         
         for (int i = 0; i < k - 1; i++)
-            heap.remove();
+            maxHeap.remove();
 
-        return heap.max();
+        return maxHeap.max();
     }
 }
