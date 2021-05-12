@@ -10,6 +10,17 @@ public class Heap<T extends Comparable<T>> {
         items = (T[]) new Comparable[size];
     }
 
+    public boolean isMaxHeap(T[] array) {
+        var index = array.length - 1;
+
+        while (index > 0) {
+            if (array[index].compareTo(array[getParentIndex(index)]) > 0)
+                return false;
+            index = getParentIndex(index);
+        }
+        return true;
+    }
+
     public void insert(T item) {
         if (isFull())
             throw new IllegalStateException("Heap is full!!");

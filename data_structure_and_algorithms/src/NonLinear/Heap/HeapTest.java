@@ -33,4 +33,10 @@ public class HeapTest {
         heap.remove();
         Assert.assertEquals(heap.toString(), "[5, 4, null, null, null, null, null, null, null, null]");
     }
+
+    @Test
+    public void isMaxheap() {
+        Assert.assertFalse(heap.isMaxHeap(new Integer[]{21, 10, 25}));
+        Assert.assertTrue(heap.isMaxHeap(new Integer[]{50, 25, 15, 10, 12, 7, 8}));
+    }
 }
