@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TrieTest {
     private Trie trie;
     private Trie2 trie2;
@@ -59,5 +61,18 @@ public class TrieTest {
         trie2.remove("canada");
         Assert.assertFalse(trie2.contains("canada"));
         Assert.assertTrue(trie2.contains("can"));
+    }
+
+    @Test
+    public void findWords() {
+        trie2.insert("smart");
+        trie2.insert("car");
+        trie2.insert("card");
+        trie2.insert("care");
+        trie2.insert("careful");
+        trie2.insert("carefully");
+
+        Assert.assertArrayEquals(trie2.findWords("car").toArray(),
+                List.of("car", "card", "care", "careful", "carefully").toArray());
     }
 }

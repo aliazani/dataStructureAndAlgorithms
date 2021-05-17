@@ -1,6 +1,8 @@
 package NonLinear.Trie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie2 {
 
@@ -113,5 +115,39 @@ public class Trie2 {
         remove(child, word, index + 1);
         if (!child.hasChildren() && !child.isEndOfWord)
             root.removeChild(ch);
+    }
+
+    public List<String> findWords(String prefix) {
+        if (prefix == null)
+            return null;
+
+        var lastNode = findLastNodeOf(prefix);
+        List<String> words = new ArrayList<>();
+        findWords(lastNode, prefix, words);
+
+        return words;
+    }
+
+    private void findWords(Node root, String prefix, List<String> words) {
+        if (root == null)
+            return;
+
+        if (root.isEndOfWord)
+            words.add(prefix);
+        for (var child : root.getChildren())
+            findWords(child, prefix + child.value, words);
+    }
+
+    private Node findLastNodeOf(String prefix) {
+        var current = root;
+        for (var ch : prefix.toCharArray()) {
+            var child = current.getChild(ch);
+
+            if (child == null)
+                return null;
+
+            current = child;
+        }
+        return current;
     }
 }
