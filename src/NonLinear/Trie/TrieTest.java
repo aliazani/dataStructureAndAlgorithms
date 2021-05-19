@@ -82,6 +82,21 @@ public class TrieTest {
         trie2.insert("card");
         Assert.assertTrue(trie2.recursiveContains("car"));
         Assert.assertFalse(trie2.recursiveContains("cabin"));
+    }
 
+    @Test
+    public void countWords() {
+        trie2.insert("test");
+        trie2.insert("testy");
+        trie2.insert("testful");
+        Assert.assertEquals(3, trie2.countWord());
+    }
+
+    @Test
+    public void longestCommonPrefix() {
+        var commonPrefix = trie2.longestCommonPrefix(new String[]{"car", "care", "card", "can", "cab", "canada"});
+        Assert.assertEquals("ca",
+                trie2.longestCommonPrefix(new String[]{"car", "care", "card", "can", "cab", "canada"})
+        );
     }
 }

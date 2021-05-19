@@ -137,6 +137,55 @@ public class Trie2 {
             root.removeChild(ch);
     }
 
+    public String longestCommonPrefix(String[] words) {
+        if (words == null)
+            return "";
+
+        var trie = new Trie2();
+        for (var word : words)
+            trie.insert(word);
+
+        var prefix = new StringBuilder();
+        var maxChars = getShortest(words).length();
+        var current = trie.root;
+
+        while (prefix.length() < maxChars) {
+            var children = current.getChildren();
+            if (children.length != 1)
+                break;
+            current = children[0];
+            prefix.append(current.value);
+        }
+        return prefix.toString();
+    }
+
+    private String getShortest(String[] words) {
+        if (words == null || words.length == 0)
+            return "";
+
+        var shortest = words[0];
+        for (int i = 1; i < words.length; i++)
+            if (words[i].length() < shortest.length())
+                shortest = words[i];
+
+        return shortest;
+    }
+
+    public int countWord() {
+        return countWord(root);
+    }
+
+    private int countWord(Node root) {
+        var total = 0;
+
+        if (root.isEndOfWord)
+            total++;
+
+        for (var child : root.getChildren())
+            total += countWord(child);
+        return total;
+    }
+
     public List<String> findWords(String prefix) {
         if (prefix == null)
             return null;
