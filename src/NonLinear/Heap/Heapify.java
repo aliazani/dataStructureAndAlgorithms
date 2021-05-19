@@ -41,7 +41,7 @@ public class Heapify {
         MaxHeap<Integer> maxHeap = new MaxHeap<>(array.length);
         for (var item : array)
             maxHeap.insert(item);
-        
+
         for (int i = 0; i < k - 1; i++)
             maxHeap.remove();
 
