@@ -46,7 +46,8 @@ public class BinaryTreeDemo {
         System.out.println(tree1.maximum());
 
         System.out.println("tree find 3: " + tree2.find(3));
-        System.out.println("tree contains3 : " + tree2.contains(3));
+        System.out.println("tree contains 3: " + tree2.contains(3));
+        System.out.println("tree contains 23: " + tree2.contains(23));
         System.out.println(tree2.contains(50));
         System.out.println(tree2.isPerfect());
 

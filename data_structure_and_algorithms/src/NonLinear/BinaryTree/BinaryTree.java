@@ -1,7 +1,5 @@
 package NonLinear.BinaryTree;
 
-import java.util.NoSuchElementException;
-
 public class BinaryTree<T extends Comparable<T>> {
     private class Node<T> {
         private final T value;
@@ -21,7 +19,6 @@ public class BinaryTree<T extends Comparable<T>> {
     private Node<T> root;
     private int size;
     private int countLeaves;
-    private boolean flag = false;
 
     public BinaryTree(T root) {
         this.root = new Node<>(root);
@@ -85,20 +82,16 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     public boolean contains(T item) {
-        this.flag = false;
         return contains(item, root);
     }
 
     private boolean contains(T item, Node<T> root) {
         if (root == null)
-            return flag = false;
-        else if (item.compareTo(root.value) == 0)
-            return flag = true;
-        else if (root.value.compareTo(item) > 0)
-            contains(item, root.leftChild);
-        else if (root.value.compareTo(item) < 0)
-            contains(item, root.rightChild);
-        return flag;
+            return false;
+        else if (root.value.compareTo(item) == 0)
+            return true;
+
+        return contains(item, root.leftChild) || contains(item, root.rightChild);
     }
 
     public void swapRoot() {
