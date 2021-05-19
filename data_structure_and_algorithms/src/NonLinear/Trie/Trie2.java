@@ -73,6 +73,26 @@ public class Trie2 {
         return current.isEndOfWord;
     }
 
+    public boolean recursiveContains(String word) {
+        if (word == null)
+            return false;
+        return recursiveContains(word, root, 0);
+    }
+
+    private boolean recursiveContains(String word, Node root, int index) {
+        if (index == word.length())
+            return root.isEndOfWord;
+
+        if (root == null)
+            return false;
+
+        var ch = word.charAt(index);
+        var child = root.getChild(ch);
+        if (child == null)
+            return false;
+        return recursiveContains(word, child, index + 1);
+    }
+
     public void preOrderTraverse() {
         preOrderTraverse(root);
     }

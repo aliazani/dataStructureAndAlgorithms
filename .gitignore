@@ -1,4 +1,4 @@
 dataStructureAndAlgorithms.iml
 .idea
-out/
-data_structure_and_algorithms/out/
+out/*
+data_structure_and_algorithms/out/*

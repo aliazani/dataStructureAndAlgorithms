@@ -75,4 +75,13 @@ public class TrieTest {
         Assert.assertArrayEquals(trie2.findWords("car").toArray(),
                 List.of("car", "card", "care", "careful", "carefully").toArray());
     }
+
+    @Test
+    public void recursiveContains() {
+        trie2.insert("car");
+        trie2.insert("card");
+        Assert.assertTrue(trie2.recursiveContains("car"));
+        Assert.assertFalse(trie2.recursiveContains("cabin"));
+
+    }
 }
