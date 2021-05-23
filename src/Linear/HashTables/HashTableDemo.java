@@ -11,7 +11,6 @@ public class HashTableDemo {
         System.out.println(hash("12345-A"));
         String str = "Ali";
         System.out.println("Ali's hashCode: " + str.hashCode());
-        showMyHashTable();
         int[] numbers = {1, 2, 3, 3, 3, 1, 2, 4, 5, 4, 3, 9, 3};
         System.out.println(mostFrequent(numbers));
         var res = countPairsWithDiff(new int[]{1, 7, 5, 9, 2, 12, 3}, 2);
@@ -20,6 +19,8 @@ public class HashTableDemo {
         System.out.println(Arrays.toString(res2));
         System.out.println("MyHashMap:");
         showMyHashMap();
+        System.out.println("MyHashTable");
+        showMyHashTable();
     }
 
     private static void showHashMap() {
@@ -136,10 +137,9 @@ public class HashTableDemo {
                     return new int[]{i, j};
 
         return null;
-
     }
 
-    public static void showMyHashMap(){
+    public static void showMyHashMap() {
         MyHashMap<Integer, String> map = new MyHashMap<>(5);
         map.put(1, "A");
         map.put(2, "B");
@@ -155,6 +155,5 @@ public class HashTableDemo {
         System.out.println(map);
         System.out.println(map.get(8));
         System.out.println(map.size());
-
     }
 }
